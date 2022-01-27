@@ -1,3 +1,5 @@
+import {upsertBlogPost} from "../db.js";
+
 export class Entity {
   constructor(id) {
     this.id = id
@@ -11,6 +13,7 @@ export class Entity {
 
   fill(payload) {
     this.result = payload
+    upsertBlogPost(this.id, payload)
   }
 }
 

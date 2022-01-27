@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {upsertBlogPost} from "./db.js";
+import {fetchData, initQueue} from "./fetch.js";
 
 
 try {
@@ -9,9 +9,9 @@ try {
   console.error(error);
 }
 
-upsertBlogPost(5, {userId: '3', title: 'Title Ins or Upd', body: 'Body Ins or Upd'})
+//upsertBlogPost(5, {userId: '3', title: 'Title Ins or Upd', body: 'Body Ins or Upd'})
 
 
-// initQueue()
-// fetchData()
+initQueue()
+fetchData()
 //setInterval(fetchData, 60 * 60 * 1000);

@@ -30,7 +30,9 @@ export const fetchData = async () => {
         const ind = Queue.findEntityIndex(e.id)
         if (ind !== -1) {
           Queue.list[ind].attempt()
-          Queue.list[ind].fill(e.body)
+          if (e.body) {
+            Queue.list[ind].fill(e.body)
+          }
         }
       }
     )
