@@ -1,6 +1,7 @@
 import {Queue} from "./classes/lists.js";
 import {getJsonPlaceholder} from "./boundaries.js";
 import {ATTEMPTS, PORTION_LENGTH, QUEUE_LENGTH} from "./constants.js";
+import {upsertBlogPost} from "./db.js";
 
 export const initQueue = () => {
   for (let i = 1; i <= QUEUE_LENGTH; i++) {
@@ -13,6 +14,7 @@ const getPortion = () => {
 }
 export const fetchData = async () => {
   console.log('--- Starting fetch ---')
+  let upserted = 0
   let portion
   portion = getPortion()
 
@@ -31,11 +33,13 @@ export const fetchData = async () => {
           Queue.list[ind].attempt()
           if (e.body) {
             Queue.list[ind].fill(e.body)
+            upsertBlogPost(e.id, e.body)
+            upserted++
           }
         }
       }
     )
     portion = getPortion()
   }
-  console.log(`Fetched ${Queue.list.length} items`)
+  console.log(`Fetched ${Queue.list.length}, upserted ${upserted} items`)
 }

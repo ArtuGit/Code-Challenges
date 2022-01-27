@@ -7,6 +7,7 @@ export const BlogPostSchema = new Schema({
   userId: String,
   title: String,
   body: String,
+  updatedByUser: Boolean
 }).index({userId: 1});
 
 export const BlogPostModel = mongoose.model('BlogPost', BlogPostSchema);

@@ -1,5 +1,3 @@
-import {upsertBlogPost} from "../db.js";
-
 export class BlogPost {
   constructor(id) {
     this.id = id
@@ -13,7 +11,6 @@ export class BlogPost {
 
   fill(payload) {
     this.result = payload
-    upsertBlogPost(this.id, payload)
   }
 }
 
