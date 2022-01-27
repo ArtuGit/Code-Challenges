@@ -5,7 +5,6 @@ import {getJsonPlaceholder} from "./boundaries.js";
 for (let i = 1; i <= QUEUE_LENGTH; i++) {
   Queue.addEntity(i)
 }
-console.log('Queue before:', Queue.list)
 
 const getPortion = () => {
   return Queue.list.filter(
@@ -13,12 +12,12 @@ const getPortion = () => {
 }
 
 const fetchData = async () => {
-
+  console.log('--- Starting fetch ---')
+  console.log('Queue before:', Queue.list)
   let portion
   portion = getPortion()
 
   while (portion.length > 0) {
-    console.log('portion:', portion)
 
     const portionPromises = portion.map(async (e) => {
       return getJsonPlaceholder(e.id)
@@ -38,8 +37,7 @@ const fetchData = async () => {
 
     portion = getPortion()
   }
+  console.log('Queue after:', Queue.list)
 }
 
-await fetchData()
-
-console.log('Queue after:', Queue.list)
+setInterval(fetchData, 60 * 60 * 1000);
