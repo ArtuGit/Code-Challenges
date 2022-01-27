@@ -1,4 +1,4 @@
-import {Entity} from "./Entity.js";
+import {BlogPost} from "./BlogPost.js";
 
 export class EntitiesList {
   lengthLimit = 0
@@ -9,7 +9,7 @@ export class EntitiesList {
 
   addEntity(id) {
     if (this.list.length < this.lengthLimit) {
-      this.list.push(new Entity(id))
+      this.list.push(new BlogPost(id))
     } else {
       throw `The length of the Entities List (${this.lengthLimit}) is exceeded`
     }

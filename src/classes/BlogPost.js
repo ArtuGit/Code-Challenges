@@ -1,6 +1,6 @@
 import {upsertBlogPost} from "../db.js";
 
-export class Entity {
+export class BlogPost {
   constructor(id) {
     this.id = id
     this.result = null

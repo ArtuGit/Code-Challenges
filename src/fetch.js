@@ -13,7 +13,6 @@ const getPortion = () => {
 }
 export const fetchData = async () => {
   console.log('--- Starting fetch ---')
-  console.log('Queue before:', Queue.list)
   let portion
   portion = getPortion()
 
@@ -36,8 +35,7 @@ export const fetchData = async () => {
         }
       }
     )
-
     portion = getPortion()
   }
-  console.log('Queue after:', Queue.list)
+  console.log(`Fetched ${Queue.list.length} items`)
 }
