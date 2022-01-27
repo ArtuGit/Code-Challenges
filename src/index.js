@@ -2,30 +2,44 @@ import {Queue} from "./classes/lists.js";
 import {ATTEMPTS, PORTION_LENGTH, QUEUE_LENGTH} from "./constants.js";
 import {getJsonPlaceholder} from "./boundaries.js";
 
-// ToDo: Get from MongoDb
 for (let i = 1; i <= QUEUE_LENGTH; i++) {
   Queue.addEntity(i)
 }
-console.log('Queue:', Queue.list)
+console.log('Queue before:', Queue.list)
 
 const getPortion = () => {
   return Queue.list.filter(
-    (e) => (e.result || e.attempts <= ATTEMPTS)).slice(0, PORTION_LENGTH)
+    (e) => (!e.result || e.attempts >= ATTEMPTS)).slice(0, PORTION_LENGTH)
 }
-
-const portion = getPortion()
-console.log('getPortion:', getPortion())
 
 const fetchData = async () => {
-  const portionPromises = portion.map(async (e) => {
-    return getJsonPlaceholder(e.id)
-  })
-  console.log('portionPromises', portionPromises)
 
-  const res = await Promise.all(portionPromises)
-  console.log('res', res)
+  let portion
+  portion = getPortion()
+
+  while (portion.length > 0) {
+    console.log('portion:', portion)
+
+    const portionPromises = portion.map(async (e) => {
+      return getJsonPlaceholder(e.id)
+    })
+
+    const response = await Promise.all(portionPromises)
+
+    response.forEach(
+      (e) => {
+        const ind = Queue.findEntityIndex(e.id)
+        if (ind !== -1) {
+          Queue.list[ind].attempt()
+          Queue.list[ind].fill(e.body)
+        }
+      }
+    )
+
+    portion = getPortion()
+  }
 }
 
-fetchData()
+await fetchData()
 
-
+console.log('Queue after:', Queue.list)

@@ -5,10 +5,12 @@ export class Entity {
     this.attempts = 0
   }
 
-  fill(userId, title, body) {
-    this.result = {
-      userId, title, body
-    }
+  attempt() {
+    this.attempts++
+  }
+
+  fill(payload) {
+    this.result = payload
   }
 }
 
