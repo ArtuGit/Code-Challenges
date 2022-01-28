@@ -9,9 +9,6 @@ try {
   console.error(error);
 }
 
-//upsertBlogPost(5, {userId: '3', title: 'Title Ins or Upd', body: 'Body Ins or Upd'})
-
-
 initQueue()
 fetchData()
 //setInterval(fetchData, 60 * 60 * 1000);
