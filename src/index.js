@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import {fetchData, initQueue} from "./fetch.js";
-import {apiDescription, app} from "./api.js";
+import mongoose from 'mongoose';
+import { fetchData, initQueue } from './fetch.js';
+import { apiDescription, app } from './api.js'
 
-const port = 3000
+const port = 3000;
 
 try {
   await mongoose.connect('mongodb://localhost:27017/adway-code-test');
@@ -11,11 +11,10 @@ try {
   console.error(error);
 }
 
-apiDescription()
+apiDescription();
 app.listen(port, () => {
-  console.log('Server started at http://localhost:' + port);
-})
+  console.log(`Server started at http://localhost:${port}`);
+});
 
-initQueue()
+initQueue();
 setInterval(fetchData, 60 * 60 * 1000);
-

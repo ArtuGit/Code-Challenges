@@ -1,16 +1,15 @@
 export class BlogPost {
-  constructor(id) {
+  constructor (id) {
     this.id = id
     this.result = null
     this.attempts = 0
   }
 
-  attempt() {
+  attempt () {
     this.attempts++
   }
 
-  fill(payload) {
+  fill (payload) {
     this.result = payload
   }
 }
-
