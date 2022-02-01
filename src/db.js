@@ -31,6 +31,17 @@ export const DbBulkUpsert = async (payload) => {
   } catch (error) {
     console.error(error);
   }
-
 }
 
+export const dbFindOne = async (id, payload) => {
+  console.log('payload', payload)
+  try {
+    return BlogPostModel.collection.findOneAndUpdate(
+      {id},
+      {$set: {...payload, updatedByUser: true}},
+      {returnDocument: 'after'}
+    )
+  } catch (error) {
+    console.error(error);
+  }
+}

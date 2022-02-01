@@ -12,6 +12,7 @@ const getPortion = () => {
   return Queue.list.filter(
     (e) => (!e.result || e.attempts >= ATTEMPTS)).slice(0, PORTION_LENGTH)
 }
+
 export const fetchData = async () => {
   console.log('--- Starting fetch ---')
   let dbUpserted = 0
