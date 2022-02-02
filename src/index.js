@@ -12,14 +12,14 @@ async function main () {
     console.error(error)
   }
 
+  await fetchData()
+  setInterval(fetchData, 10000)
+  // setInterval(fetchData, 60 * 60 * 1000)
+
   apiDescription()
   app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`)
   })
-
-  await fetchData()
-  await fetchData()
-// setInterval(fetchData, 60 * 60 * 1000)
 }
 
 main()

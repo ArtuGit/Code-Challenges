@@ -16,7 +16,6 @@ const getPortion = () => Queue.list.filter(
 export const fetchData = async () => {
   console.log('--- Starting fetch ---')
   initQueue()
-  console.log('Queue.list:', Queue.list)
   let dbUpserted = 0
   let DbPayload
   let portion
