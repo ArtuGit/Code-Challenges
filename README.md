@@ -1,4 +1,4 @@
-## Description
+## Task Description
 
 ### Part 1
 
@@ -35,3 +35,30 @@ uguptu
 mcbroh
 
 We'll evaluate the code structure, quality and cleaness.
+
+## Solution
+
+### Installation
+`npm install`
+
+### Running
+
+This app requires docker or a local mongodb installation.  If using a local mongodb, see `index.js` for connection options, and make sure there are matching options for the mongodb installation and the source code.
+
+#### Docker
+
+There is a `docker-compose.yml` file for starting Docker.
+
+`docker-compose up`
+
+After running the app, you can stop the Docker container with
+
+`docker-compose down`
+
+### Run the app
+
+Then, run as usual:
+
+`npm run start`
+
+
