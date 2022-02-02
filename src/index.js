@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { fetchData, initQueue } from './fetch.js'
+import { fetchData } from './fetch.js'
 import { apiDescription, app } from './api.js'
 
 const port = 3000
@@ -17,8 +17,8 @@ async function main () {
     console.log(`Server started at http://localhost:${port}`)
   })
 
-  initQueue()
-  fetchData()
+  await fetchData()
+  await fetchData()
 // setInterval(fetchData, 60 * 60 * 1000)
 }
 

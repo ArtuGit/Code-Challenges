@@ -4,6 +4,7 @@ import { ATTEMPTS, PORTION_LENGTH, QUEUE_LENGTH } from './constants.js'
 import { DbBulkUpsert } from './db.js'
 
 export const initQueue = () => {
+  Queue.list = []
   for (let i = 1; i <= QUEUE_LENGTH; i++) {
     Queue.addEntity(i)
   }
@@ -14,6 +15,8 @@ const getPortion = () => Queue.list.filter(
 
 export const fetchData = async () => {
   console.log('--- Starting fetch ---')
+  initQueue()
+  console.log('Queue.list:', Queue.list)
   let dbUpserted = 0
   let DbPayload
   let portion
