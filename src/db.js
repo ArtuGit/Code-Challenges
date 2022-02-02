@@ -1,4 +1,4 @@
-import {BlogPostModel} from './schema.js'
+import { BlogPostModel } from './schema.js'
 
 export const DbBulkUpsert = async (payload) => {
   const mongoUpsertOps = []
@@ -13,12 +13,12 @@ export const DbBulkUpsert = async (payload) => {
 
   idsToUpdate.forEach(
     (id) => {
-      const {id: _id, ...dbPayload} = payload.find((e) => e.id === id)
+      const { id: _id, ...dbPayload } = payload.find((e) => e.id === id)
       mongoUpsertOps.push(
         {
           updateOne: {
-            filter: {id},
-            update: {$set: dbPayload, $setOnInsert: {updatedByUser: false}},
+            filter: { id },
+            update: { $set: dbPayload, $setOnInsert: { updatedByUser: false } },
             upsert: true
           }
         }

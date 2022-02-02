@@ -1,12 +1,12 @@
-import {BlogPost} from './BlogPost.js'
+import { BlogPost } from './BlogPost.js'
 
 export class EntitiesList {
-  constructor(lengthLimit) {
+  constructor (lengthLimit) {
     this.lengthLimit = lengthLimit
     this.list = []
   }
 
-  addEntity(id) {
+  addEntity (id) {
     if (this.list.length < this.lengthLimit) {
       this.list.push(new BlogPost(id))
     } else {
@@ -15,7 +15,7 @@ export class EntitiesList {
     }
   }
 
-  findEntityIndex(id) {
+  findEntityIndex (id) {
     return this.list.findIndex(
       (e) => (e.id === id)
     )
