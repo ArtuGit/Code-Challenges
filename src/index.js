@@ -13,8 +13,8 @@ async function main() {
   }
 
   await fetchData();
-  setInterval(fetchData, 10000);
-  // setInterval(fetchData, 60 * 60 * 1000)
+  // setInterval(fetchData, 10000);
+  setInterval(fetchData, 60 * 60 * 1000)
 
   apiDescription();
   app.listen(port, () => {
