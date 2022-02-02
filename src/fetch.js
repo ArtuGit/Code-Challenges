@@ -1,46 +1,45 @@
-import { Queue } from './classes/lists.js'
-import { getJsonPlaceholder } from './boundaries.js'
-import { ATTEMPTS, PORTION_LENGTH, QUEUE_LENGTH } from './constants.js'
-import { DbBulkUpsert } from './db.js'
+import { Queue } from "./classes/lists.js";
+import { getJsonPlaceholder } from "./boundaries.js";
+import { ATTEMPTS, PORTION_LENGTH, QUEUE_LENGTH } from "./constants.js";
+import { DbBulkUpsert } from "./db.js";
 
 export const initQueue = () => {
-  Queue.list = []
+  Queue.list = [];
   for (let i = 1; i <= QUEUE_LENGTH; i++) {
-    Queue.addEntity(i)
+    Queue.addEntity(i);
   }
-}
-const getPortion = () => Queue.list.filter(
-  (e) => (!e.result || e.attempts >= ATTEMPTS)
-).slice(0, PORTION_LENGTH)
+};
+const getPortion = () =>
+  Queue.list
+    .filter((e) => !e.result || e.attempts >= ATTEMPTS)
+    .slice(0, PORTION_LENGTH);
 
 export const fetchData = async () => {
-  console.log('--- Starting fetch ---')
-  initQueue()
-  let dbUpserted = 0
-  let DbPayload
-  let portion
-  portion = getPortion()
+  console.log("--- Starting fetch ---");
+  initQueue();
+  let dbUpserted = 0;
+  let DbPayload;
+  let portion;
+  portion = getPortion();
 
   while (portion.length > 0) {
-    DbPayload = []
-    const portionPromises = portion.map(async (e) => getJsonPlaceholder(e.id))
+    DbPayload = [];
+    const portionPromises = portion.map(async (e) => getJsonPlaceholder(e.id));
 
-    const response = await Promise.all(portionPromises)
+    const response = await Promise.all(portionPromises);
 
-    response.forEach(
-      (e) => {
-        const ind = Queue.findEntityIndex(e.id)
-        if (ind !== -1) {
-          Queue.list[ind].attempt()
-          if (e.body) {
-            Queue.list[ind].fill(e.body)
-            DbPayload.push({ id: e.id, ...e.body })
-          }
+    response.forEach((e) => {
+      const ind = Queue.findEntityIndex(e.id);
+      if (ind !== -1) {
+        Queue.list[ind].attempt();
+        if (e.body) {
+          Queue.list[ind].fill(e.body);
+          DbPayload.push({ id: e.id, ...e.body });
         }
       }
-    )
-    dbUpserted += (await DbBulkUpsert(DbPayload))
-    portion = getPortion()
+    });
+    dbUpserted += await DbBulkUpsert(DbPayload);
+    portion = getPortion();
   }
-  console.log(`Fetched ${Queue.list.length}, upserted ${dbUpserted} items`)
-}
+  console.log(`Fetched ${Queue.list.length}, upserted ${dbUpserted} items`);
+};

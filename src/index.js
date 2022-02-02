@@ -1,25 +1,25 @@
-import mongoose from 'mongoose'
-import { fetchData } from './fetch.js'
-import { apiDescription, app } from './api.js'
+import mongoose from "mongoose";
+import { fetchData } from "./fetch.js";
+import { apiDescription, app } from "./api.js";
 
-const port = 3000
+const port = 3000;
 
-async function main () {
+async function main() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/adway-code-test')
-    console.log('Mongoose is connected')
+    await mongoose.connect("mongodb://localhost:27017/adway-code-test");
+    console.log("Mongoose is connected");
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 
-  await fetchData()
-  setInterval(fetchData, 10000)
+  await fetchData();
+  setInterval(fetchData, 10000);
   // setInterval(fetchData, 60 * 60 * 1000)
 
-  apiDescription()
+  apiDescription();
   app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`)
-  })
+    console.log(`Server started at http://localhost:${port}`);
+  });
 }
 
-main()
+main();
