@@ -91,11 +91,14 @@ async function readTurn() {
   return { row, col };
 }
 
-function revealCell(row, col) {}
+function revealCell(row, col) {
+  board[row][col] = 'X'; // Elaborate on this
+}
 
 do {
-  // displayBoard();
-  const answer = await readTurn();
-} while (false);
+  displayBoard();
+  const { row, col } = await readTurn();
+  revealCell(row, col);
+} while (true);
 
 rl.close();
