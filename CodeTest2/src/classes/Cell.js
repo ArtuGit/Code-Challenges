@@ -1,7 +1,7 @@
 export class Cell {
   constructor(isMine = false) {
     this._isMine = isMine;
-    this._isRevealed = true;
+    this._isRevealed = false;
     if (this._isMine) {
       this._value = "*";
     } else {
@@ -26,10 +26,14 @@ export class Cell {
   }
 
   getDisplayValue(testMode = false) {
-    return (this._isRevealed) ? "#" : this._value;
+    if (testMode) {
+      return this._value + (this._isRevealed ? "!" : " ");
+    } else {
+      return this._isRevealed ? this._value : "#";
+    }
   }
 
   reveal() {
-    this._isRevealed = false;
+    this._isRevealed = true;
   }
 }

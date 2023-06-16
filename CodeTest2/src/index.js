@@ -4,7 +4,7 @@ import { Cell } from "./classes/Cell.js";
 1;
 const rl = readline.createInterface({ input, output });
 
-const testMode = true;
+const testMode = false;
 
 // Constants to define the size of the game board
 const ROWS = 8;
@@ -67,11 +67,12 @@ for (var i = 0; i < mines.length; i++) {
 
 // Function to display the game board in the console
 function displayBoard() {
-  console.log("  " + [...Array(COLS).keys()].join(" "));
+  const joiner = testMode ? "  " : " ";
+  console.log("  " + [...Array(COLS).keys()].join(joiner));
   for (let row = 0; row < ROWS; row++) {
     let rowString = row + " ";
     for (let col = 0; col < COLS; col++) {
-      rowString = rowString + board[row][col].getDisplayValue(testMode) + " "
+      rowString = rowString + board[row][col].getDisplayValue(testMode) + " ";
     }
     console.log(rowString);
   }
@@ -82,7 +83,7 @@ async function readTurn() {
   let correctInput = false;
   do {
     const rawTurn = await rl.question(
-      '\nEnter your turn, row/col, e.g. 1/0, 2/6, 3/1): '
+      "\nEnter your turn, row/col, e.g. 1/0, 2/6, 3/1): "
     );
     const turn = rawTurn.split("/");
     row = parseInt(turn[0]);
@@ -106,7 +107,7 @@ function revealCell(row, col) {
     finished = true;
     finishMessage = "You lost!";
   }
-  board[row][col].reveal()
+  board[row][col].reveal();
   // Elaborate on this
 }
 
