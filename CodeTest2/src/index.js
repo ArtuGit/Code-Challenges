@@ -4,7 +4,7 @@ import { Cell } from "./classes/Cell.js";
 1;
 const rl = readline.createInterface({ input, output });
 
-const testMode = false;
+const testMode = true;
 
 // Constants to define the size of the game board
 const ROWS = 8;
@@ -71,7 +71,7 @@ function displayBoard() {
   for (let row = 0; row < ROWS; row++) {
     let rowString = row + " ";
     for (let col = 0; col < COLS; col++) {
-      rowString = rowString + board[row][col].getDisplayValue() + " "
+      rowString = rowString + board[row][col].getDisplayValue(testMode) + " "
     }
     console.log(rowString);
   }

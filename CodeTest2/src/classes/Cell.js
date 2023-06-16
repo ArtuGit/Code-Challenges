@@ -1,7 +1,7 @@
 export class Cell {
   constructor(isMine = false) {
     this._isMine = isMine;
-    this._isRevealed = false;
+    this._isRevealed = true;
     if (this._isMine) {
       this._value = "*";
     } else {
@@ -25,8 +25,8 @@ export class Cell {
     this._value = value;
   }
 
-  getDisplayValue() {
-    return this._isRevealed ? "" : this._value;
+  getDisplayValue(testMode = false) {
+    return (this._isRevealed) ? "#" : this._value;
   }
 
   reveal() {
