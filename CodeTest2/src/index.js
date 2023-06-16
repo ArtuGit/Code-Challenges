@@ -11,8 +11,12 @@ const MINES = 10;
 // A 2D array to represent the game board
 const board = [];
 
+
 // An array to keep track of the positions of mines on the board
 const mines = [];
+
+let finished = false;
+let finishMessage = "";
 
 // Initialize the board, state, and place mines randomly
 for (var row = 0; row < ROWS; row++) {
@@ -72,7 +76,7 @@ async function readTurn() {
   let correctInput = false;
   do {
     const rawTurn = await rl.question(
-      "Enter your turn, row/col, e.g. 1/2, 3/6, 3/1): "
+      "Enter your turn, row/col, e.g. 1/0, 2/6, 3/1): "
     );
     const turn = rawTurn.split("/");
     row = parseInt(turn[0]);
@@ -92,13 +96,20 @@ async function readTurn() {
 }
 
 function revealCell(row, col) {
-  board[row][col] = 'X'; // Elaborate on this
+  if (board[col][row] === "*") {
+    finished = true;
+    finishMessage = "You lost!";
+    return
+  }
+  board[col][row] = 'X'; // Elaborate on this
 }
 
 do {
   displayBoard();
   const { row, col } = await readTurn();
   revealCell(row, col);
-} while (true);
+} while (!finished);
 
+
+console.log(`\n--- ${finishMessage} ---`)
 rl.close();
