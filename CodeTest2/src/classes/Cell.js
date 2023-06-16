@@ -26,7 +26,7 @@ export class Cell {
   }
 
   getDisplayValue() {
-    return this._isRevealed ? this._value : " ";
+    return this._isRevealed ? "" : this._value;
   }
 
   reveal() {
