@@ -30,6 +30,6 @@ export class Cell {
   }
 
   reveal() {
-    this._isRevealed = true;
+    this._isRevealed = false;
   }
 }

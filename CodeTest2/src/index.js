@@ -105,9 +105,9 @@ function revealCell(row, col) {
   if (board[row][col].value === "*") {
     finished = true;
     finishMessage = "You lost!";
-    return;
   }
-  board[row][col].value = "X"; // Elaborate on this
+  board[row][col].reveal()
+  // Elaborate on this
 }
 
 do {
