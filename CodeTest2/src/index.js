@@ -4,7 +4,7 @@ import { Cell } from "./classes/Cell.js";
 1;
 const rl = readline.createInterface({ input, output });
 
-const testMode = false;
+const testMode = true;
 
 // Constants to define the size of the game board
 const ROWS = 8;
