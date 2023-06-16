@@ -1,6 +1,6 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-
+import { Cell } from "./classes/Cell.js";1
 const rl = readline.createInterface({ input, output });
 
 // Constants to define the size of the game board
@@ -96,12 +96,12 @@ async function readTurn() {
 }
 
 function revealCell(row, col) {
-  if (board[col][row] === "*") {
+  if (board[row][col] === "*") {
     finished = true;
     finishMessage = "You lost!";
     return
   }
-  board[col][row] = 'X'; // Elaborate on this
+  board[row][col] = 'X'; // Elaborate on this
 }
 
 do {
