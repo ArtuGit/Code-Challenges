@@ -7,9 +7,9 @@ const rl = readline.createInterface({ input, output });
 const testMode = true;
 
 // Constants to define the size of the game board
-const ROWS = 8;
-const COLS = 8;
-const MINES = 10;
+const ROWS = 2;
+const COLS = 2;
+const MINES = 1;
 
 // A 2D array to represent the game board
 const board = [];
@@ -103,16 +103,29 @@ async function readTurn() {
 }
 
 function revealCell(row, col) {
+  const areAllRevealed = () =>
+    board
+      .flat(Infinity)
+      .filter((cell) => !cell.isMine)
+      .every((cell) => cell.isRevealed);
+
   if (board[row][col].value === "*") {
     finished = true;
     finishMessage = "You lost!";
   }
+
   board[row][col].reveal();
+
+  if (areAllRevealed()) {
+    finished = true;
+    finishMessage = "You win!";
+  }
   // Elaborate on this
 }
 
 do {
   displayBoard();
+
   const { row, col } = await readTurn();
   revealCell(row, col);
 } while (!finished);

@@ -33,6 +33,9 @@ export class Cell {
     }
   }
 
+  get isRevealed() {
+    return this._isRevealed;
+  }
   reveal() {
     this._isRevealed = true;
   }
