@@ -13,6 +13,10 @@ export class Cell {
     return this._isMine;
   }
 
+  get isEmpty() {
+    return this._value === 0;
+  }
+
   get value() {
     return this._isMine ? "*" : this._value;
   }

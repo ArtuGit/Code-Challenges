@@ -1,15 +1,15 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { Cell } from "./classes/Cell.js";
-1;
+
 const rl = readline.createInterface({ input, output });
 
 const testMode = true;
 
 // Constants to define the size of the game board
-const ROWS = 2;
-const COLS = 2;
-const MINES = 1;
+const ROWS = 9;
+const COLS = 9;
+const MINES = 5;
 
 // A 2D array to represent the game board
 const board = [];
@@ -102,16 +102,63 @@ async function readTurn() {
   return { row, col };
 }
 
-function revealCell(row, col) {
+function revealEmptyCell(row, col) {
   const areAllRevealed = () =>
     board
       .flat(Infinity)
       .filter((cell) => !cell.isMine)
       .every((cell) => cell.isRevealed);
 
+  const revealAround = (entryRow, entryCol) => {
+    const revealed = new Map();
+
+    const revealDirection = (row, col) => {
+      const directions = [
+        { rowShift: 0, columnShift: 1 },
+        { rowShift: 0, columnShift: -1 },
+        { rowShift: 1, columnShift: 0 },
+        { rowShift: -1, columnShift: 0 },
+      ];
+      directions.forEach(({ rowShift, columnShift }) => {
+        let currentRow = row;
+        let currentCol = col;
+        console.log(
+          "log1:",
+          { currentRow, currentCol },
+          board[currentRow][currentCol].isEmpty
+        );
+        while (
+          currentRow >= 0 &&
+          currentRow < ROWS &&
+          currentCol >= 0 &&
+          currentCol < COLS &&
+          board[currentRow][currentCol].isEmpty
+        ) {
+          revealed.set(
+            JSON.stringify({ row: currentRow, col: currentCol }),
+            false
+          );
+          board[currentRow][currentCol].reveal();
+          currentRow = currentRow + rowShift;
+          currentCol = currentCol + columnShift;
+        }
+      });
+      revealed.set(JSON.stringify({ row, col }), true);
+      board[row][col].reveal();
+      console.log(revealed);
+      // return revealed;
+    };
+
+    revealDirection(entryRow, entryCol);
+  };
+
   if (board[row][col].value === "*") {
     finished = true;
     finishMessage = "You lost!";
+  }
+
+  if (board[row][col].isEmpty) {
+    revealAround(row, col);
   }
 
   board[row][col].reveal();
@@ -127,7 +174,7 @@ do {
   displayBoard();
 
   const { row, col } = await readTurn();
-  revealCell(row, col);
+  revealEmptyCell(row, col);
 } while (!finished);
 
 console.log(`\n--- ${finishMessage} ---`);
