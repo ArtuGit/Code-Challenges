@@ -4,12 +4,12 @@ import { Cell } from "./classes/Cell.js";
 
 const rl = readline.createInterface({ input, output });
 
-const testMode = true;
+const testMode = false;
 
 // Constants to define the size of the game board
-const ROWS = 9;
-const COLS = 9;
-const MINES = 5;
+const ROWS = 8;
+const COLS = 8;
+const MINES = 10;
 
 // A 2D array to represent the game board
 const board = [];
@@ -102,17 +102,17 @@ async function readTurn() {
   return { row, col };
 }
 
-function revealEmptyCell(row, col) {
+function revealCell(row, col) {
   const areAllRevealed = () =>
     board
       .flat(Infinity)
       .filter((cell) => !cell.isMine)
       .every((cell) => cell.isRevealed);
 
-  const revealAround = (entryRow, entryCol) => {
-    const revealed = new Map();
-
-    const revealDirection = (row, col) => {
+  const handled = new Map();
+  const revealEmptyCell = (entryRow, entryCol) => {
+    console.log({ entryRow, entryCol });
+    const reveal4Directions = (row, col) => {
       const directions = [
         { rowShift: 0, columnShift: 1 },
         { rowShift: 0, columnShift: -1 },
@@ -122,11 +122,6 @@ function revealEmptyCell(row, col) {
       directions.forEach(({ rowShift, columnShift }) => {
         let currentRow = row;
         let currentCol = col;
-        console.log(
-          "log1:",
-          { currentRow, currentCol },
-          board[currentRow][currentCol].isEmpty
-        );
         while (
           currentRow >= 0 &&
           currentRow < ROWS &&
@@ -134,22 +129,31 @@ function revealEmptyCell(row, col) {
           currentCol < COLS &&
           board[currentRow][currentCol].isEmpty
         ) {
-          revealed.set(
-            JSON.stringify({ row: currentRow, col: currentCol }),
-            false
+          const isHandled = handled.get(
+            JSON.stringify({ row: currentRow, col: currentCol })
           );
-          board[currentRow][currentCol].reveal();
+          if (isHandled === undefined) {
+            handled.set(
+              JSON.stringify({ row: currentRow, col: currentCol }),
+              false
+            );
+            board[currentRow][currentCol].reveal();
+          }
           currentRow = currentRow + rowShift;
           currentCol = currentCol + columnShift;
         }
       });
-      revealed.set(JSON.stringify({ row, col }), true);
+      handled.set(JSON.stringify({ row, col }), true);
       board[row][col].reveal();
-      console.log(revealed);
-      // return revealed;
+      let nextCell = [...handled].find(([key, value]) => value === false);
+      if (nextCell !== undefined) {
+        nextCell = JSON.parse(nextCell[0]);
+        console.log({ nextCell });
+        revealEmptyCell(nextCell.row, nextCell.col);
+      }
     };
 
-    revealDirection(entryRow, entryCol);
+    reveal4Directions(entryRow, entryCol);
   };
 
   if (board[row][col].value === "*") {
@@ -158,7 +162,7 @@ function revealEmptyCell(row, col) {
   }
 
   if (board[row][col].isEmpty) {
-    revealAround(row, col);
+    revealEmptyCell(row, col);
   }
 
   board[row][col].reveal();
@@ -167,14 +171,13 @@ function revealEmptyCell(row, col) {
     finished = true;
     finishMessage = "You win!";
   }
-  // Elaborate on this
 }
 
 do {
   displayBoard();
 
   const { row, col } = await readTurn();
-  revealEmptyCell(row, col);
+  revealCell(row, col);
 } while (!finished);
 
 console.log(`\n--- ${finishMessage} ---`);
