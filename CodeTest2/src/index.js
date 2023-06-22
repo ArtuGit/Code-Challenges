@@ -111,7 +111,6 @@ function revealCell(row, col) {
 
   const handled = new Map();
   const revealEmptyCell = (entryRow, entryCol) => {
-    console.log({ entryRow, entryCol });
     const reveal4Directions = (row, col) => {
       const directions = [
         { rowShift: 0, columnShift: 1 },
@@ -148,7 +147,6 @@ function revealCell(row, col) {
       let nextCell = [...handled].find(([key, value]) => value === false);
       if (nextCell !== undefined) {
         nextCell = JSON.parse(nextCell[0]);
-        console.log({ nextCell });
         revealEmptyCell(nextCell.row, nextCell.col);
       }
     };
