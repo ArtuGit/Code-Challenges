@@ -90,9 +90,9 @@ class Transport {
   let transports = []
   for (let i=1;i<10;i++){
     if (i % 3 == 0) {
-      transports.push(new Track(i, 100, 80))
+      transports.push(new Track(i, 20, 50))
     } else {
-      transports.push(new Car(i, 80, 100))
+      transports.push(new Car(i, 5, 80))
     }
   }
   
