@@ -95,15 +95,19 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "challenge/github-scanner",
-    "last_opened_file_path": "/home/artu/Projects/Artu/Code-Challenges",
+    "javascript.nodejs.core.library.configured.version": "20.9.0",
+    "javascript.nodejs.core.library.typings.version": "20.9.5",
+    "last_opened_file_path": "/home/artu/Projects/Artu/Code-Challenges/Github Scanner/package.json",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
+    "nodejs_interpreter_path": "/home/artu/.nvm/versions/node/v20.9.0/bin/node",
+    "nodejs_package_manager_path": "pnpm",
     "npm.start:dev (1).executor": "Run",
     "npm.start:dev.executor": "Run",
-    "settings.editor.selected.configurable": "application.passwordSafe",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "/home/artu/Projects/Artu/Code-Challenges/Github Scanner/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -115,18 +119,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start:dev (1)">
+  <component name="RunManager" selected="npm.start:dev">
     <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/CodeTest2/src/classes/test.js" working-dir="$PROJECT_DIR$/Minesweeper Reveal/src/classes">
-      <method v="2" />
-    </configuration>
-    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/Minesweeper Reveal/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -139,19 +133,8 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start:dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/Github Scanner/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start:dev" />
-      </scripts>
-      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.9.0/bin/node" />
-      <package-manager value="pnpm" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="start:dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/Github Scanner/github-scanner/package.json" />
+      <package-json value="$PROJECT_DIR$/Github Scanner/package.json" />
       <command value="run" />
       <scripts>
         <script value="start:dev" />
@@ -163,9 +146,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start:dev (1)" />
         <item itemvalue="npm.start:dev" />
-        <item itemvalue="npm.start (1)" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.test.js" />
       </list>
@@ -203,7 +184,7 @@
       <workItem from="1689321292925" duration="25000" />
       <workItem from="1689762105458" duration="29000" />
       <workItem from="1722882665558" duration="1817000" />
-      <workItem from="1722891234777" duration="382000" />
+      <workItem from="1722891234777" duration="2526000" />
     </task>
     <task id="LOCAL-00001" summary="CodeTest2">
       <created>1686771789394</created>
@@ -317,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687464377029</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="idea">
+      <option name="closed" value="true" />
+      <created>1722891713219</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1722891713219</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +327,11 @@
     <MESSAGE value="You win!" />
     <MESSAGE value="revealEmptyCell POC with maps" />
     <MESSAGE value="Working solution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working solution" />
+    <MESSAGE value="idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
