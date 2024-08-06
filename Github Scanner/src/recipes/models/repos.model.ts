@@ -16,4 +16,10 @@ export class Repository {
 
   @Field(type => Number)
   numberOfFiles: number;
+
+  @Field(type => String)
+  anyMarkdownFileContent: string;
+
+  @Field(type => [String])
+  activeWebhooks: string[];
 }

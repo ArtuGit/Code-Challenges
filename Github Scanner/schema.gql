@@ -11,6 +11,8 @@ type Repository {
   owner: String!
   isPrivate: Boolean!
   numberOfFiles: Float!
+  anyMarkdownFileContent: String!
+  activeWebhooks: [String!]!
 }
 
 """Date custom scalar type"""
