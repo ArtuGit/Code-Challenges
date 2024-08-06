@@ -17,6 +17,5 @@ type Repository {
 scalar Date
 
 type Query {
-  recipe(id: String!): Repository!
-  recipes(skip: Int! = 0, take: Int! = 25): [Repository!]!
+  repos(skip: Int! = 0, take: Int! = 25): [Repository!]!
 }

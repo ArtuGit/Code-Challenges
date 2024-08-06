@@ -9,19 +9,10 @@ const pubSub = new PubSub();
 
 @Resolver(of => Repository)
 export class ReposResolver {
-  constructor(private readonly recipesService: ReposService) {}
-
-  @Query(returns => Repository)
-  async recipe(@Args('id') id: string): Promise<Repository> {
-    const recipe = await this.recipesService.findOneById(id);
-    if (!recipe) {
-      throw new NotFoundException(id);
-    }
-    return recipe;
-  }
+  constructor(private readonly reposService: ReposService) {}
 
   @Query(returns => [Repository])
-  recipes(@Args() recipesArgs: ReposArgs): Promise<Repository[]> {
-    return this.recipesService.findAll(recipesArgs);
+  repos(@Args() recipesArgs: ReposArgs): Promise<Repository[]> {
+    return this.reposService.findAll(recipesArgs);
   }
 }
